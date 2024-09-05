@@ -1,12 +1,17 @@
 'use client';
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import { responseOtp } from './api/verify';
 
 interface VerificationFormData {
+  email: string;
   verificationCode: string;
 }
 
-const page: React.FC = () => {
+const VerifyPage: React.FC = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState<VerificationFormData>({
+    email: '',
     verificationCode: '',
   });
   const [error, setError] = useState<string>('');
@@ -26,18 +31,31 @@ const page: React.FC = () => {
     setError('');
     setSuccess('');
 
-    if (!formData.verificationCode.trim()) {
-      setError('Verification code is required');
+    if (!formData.email.trim() || !formData.verificationCode.trim()) {
+      setError('Email and verification code are required');
       return;
     }
 
     try {
-      // Here you would typically send a request to your API to verify the code
-      // For this example, we'll just simulate a successful verification
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulating API call
-      setSuccess('Verification successful!');
+      const response= await fetch('/api/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const responseData:responseOtp = await response.json();
+
+      if (response.ok) {
+        setSuccess(responseData.message);
+        // Redirect to a success page or dashboard after successful verification
+        setTimeout(() => router.push('/dashboard'), 2000);
+      } else {
+        setError(responseData.message);
+      }
     } catch (error) {
-      setError('Failed to verify code. Please try again.');
+      setError('Failed to verify OTP. Please try again.');
     }
   };
 
@@ -58,6 +76,23 @@ const page: React.FC = () => {
             <div className="mb-4 text-green-600 text-sm">{success}</div>
           )}
           <form className="space-y-6" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email
+              </label>
+              <div className="mt-1">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
             <div>
               <label htmlFor="verificationCode" className="block text-sm font-medium text-gray-700">
                 Verification Code
@@ -90,4 +125,4 @@ const page: React.FC = () => {
   );
 };
 
-export default page;
+export default VerifyPage;

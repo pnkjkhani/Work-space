@@ -2,14 +2,14 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { connectToDatabase } from '../utils/db';
 import User from '../schemas/user.schema';
 
-type Data = {
+export type responseOtp = {
   success: boolean;
   message: string;
 };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<responseOtp>
 ) {
   if (req.method === 'POST') {
     const { email, verificationCode } = req.body;
@@ -20,7 +20,7 @@ export default async function handler(
 
     try {
       // Connect to the database
-      const db = await connectToDatabase();
+      await connectToDatabase();
       
       // Find the user by email
       const user = await User.findOne({ email });
@@ -36,7 +36,7 @@ export default async function handler(
       // Check if OTP has expired
       if (new Date() > user.otpExpires) {
         // Clear the OTP and expiration
-        user.otp ='';
+        user.otp = '';
         user.otpExpires = new Date();
         await user.save();
         return res.status(400).json({ success: false, message: 'OTP has expired' });

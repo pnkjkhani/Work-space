@@ -2,8 +2,10 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { Button, Flex, Container, Heading, Box, Text } from '@radix-ui/themes';
 import * as Form from '@radix-ui/react-form';
-import { UserInput } from './api/sign-up';
+import { UserInput } from './api/signup';
 import { useRouter } from 'next/router';
+import { SignUpResponse } from './api/signup';
+import Link from 'next/link';
 
 const SignUp: React.FC = () => {
   const [formData, setFormData] = useState<UserInput>({
@@ -26,7 +28,7 @@ const SignUp: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/sign-up', {
+      const response: Response = await fetch('/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,15 +36,15 @@ const SignUp: React.FC = () => {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
-      console.log(data);
+      const signUpApiResponse: SignUpResponse = await response.json();
+      console.log(signUpApiResponse);
       if (response.ok) {
-        setStatus({ message: data.message, isError: false });
+        setStatus({ message: signUpApiResponse.message, isError: false });
         setFormData({ firstName: '', lastName: '', email: '' }); // Reset form
         // Redirect to verify page
         router.push('/verify');
       } else {
-        setStatus({ message: data.message, isError: true });
+        setStatus({ message: signUpApiResponse.message, isError: true });
       }
     } catch (error) {
       setStatus({ message: 'An error occurred. Please try again.', isError: true });
@@ -126,6 +128,13 @@ const SignUp: React.FC = () => {
                   {isSubmitting ? 'Signing Up...' : 'Sign Up'}
                 </Button>
               </Form.Submit>
+
+              <Text align="center">
+                Already have an account?{' '}
+                <Link href="/login" style={{ color: '#6366f1', textDecoration: 'underline' }}>
+                  Sign in
+                </Link>
+              </Text>
             </Flex>
           </Form.Root>
         </Container>
