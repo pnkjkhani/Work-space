@@ -1,25 +1,26 @@
 "use client"
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 import { Button, Flex, Container, Heading, Box, Text } from '@radix-ui/themes';
 import * as Form from '@radix-ui/react-form';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { LoginResponse } from './api/login';
-
-interface LoginFormData {
-  email: string;
-  // Remove password field
-}
-
+import { LoginRequestBody } from './api/login';
 
 const Login: React.FC = () => {
-  const [formData, setFormData] = useState<LoginFormData>({
+  const [formData, setFormData] = useState<LoginRequestBody>({
     email: '',
-    // Remove password field
   });
   const [status, setStatus] = useState<{ message: string; isError: boolean } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const userEmail = localStorage.getItem('userEmail');
+    if (userEmail) {
+      router.push('/dashboard');
+    }
+  }, [router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

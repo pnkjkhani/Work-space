@@ -1,16 +1,12 @@
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { responseOtp } from './api/verify';
-
-interface VerificationFormData {
-  email: string;
-  verificationCode: string;
-}
+import { verifyResponse } from './api/verify';
+import { VerifyRequestBody } from './api/verify';
 
 const VerifyPage: React.FC = () => {
   const router = useRouter();
-  const [formData, setFormData] = useState<VerificationFormData>({
+  const [formData, setFormData] = useState<VerifyRequestBody>({
     email: '',
     verificationCode: '',
   });
@@ -37,7 +33,7 @@ const VerifyPage: React.FC = () => {
     }
 
     try {
-      const response= await fetch('/api/verify', {
+      const response = await fetch('/api/verify', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,11 +41,13 @@ const VerifyPage: React.FC = () => {
         body: JSON.stringify(formData),
       });
 
-      const responseData:responseOtp = await response.json();
+      const responseData: verifyResponse = await response.json();
 
       if (response.ok) {
         setSuccess(responseData.message);
-        // Redirect to a success page or dashboard after successful verification
+        // Save email to localStorage
+        localStorage.setItem('userEmail', formData.email);
+        // Redirect to dashboard after successful verification
         setTimeout(() => router.push('/dashboard'), 2000);
       } else {
         setError(responseData.message);

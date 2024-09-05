@@ -1,6 +1,5 @@
 import nodemailer from 'nodemailer';
 import { createTransport } from 'nodemailer';
-import { SES } from 'aws-sdk';
 export async function sendOTPEmail(email: string, otp: string): Promise<boolean> {
   try {
     // Create a transporter using AWS SES

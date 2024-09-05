@@ -1,9 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { connectToDatabase } from '../utils/db';
 import User from '../schemas/user.schema';
-import {isValidEmail} from './signup';
+import { isValidEmail } from '../helper/isValidEmail';
 import { sendOTPEmail } from '../helper/sendOTP';
 import { generateOTP } from '../helper/generateOTP';
+
+export type LoginRequestBody = {
+  email: string;
+};
 
 export type LoginResponse = {
   success: boolean;
@@ -17,7 +21,7 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     try {
-      const { email } = req.body;
+      const { email } = req.body as LoginRequestBody;
 
       if (!email || !isValidEmail(email)) {
         return res.status(400).json({ success: false, message: 'Valid email is required' });

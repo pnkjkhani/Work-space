@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { Button, Flex, Container, Heading, Box, Text } from '@radix-ui/themes';
 import * as Form from '@radix-ui/react-form';
 import { UserInput } from './api/signup';
@@ -8,6 +8,15 @@ import { SignUpResponse } from './api/signup';
 import Link from 'next/link';
 
 const SignUp: React.FC = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const userEmail = localStorage.getItem('userEmail');
+    if (userEmail) {
+      router.push('/dashboard');
+    }
+  }, [router]);
+
   const [formData, setFormData] = useState<UserInput>({
     firstName: '',
     lastName: '',
@@ -15,7 +24,6 @@ const SignUp: React.FC = () => {
   });
   const [status, setStatus] = useState<{ message: string; isError: boolean } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const router = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
