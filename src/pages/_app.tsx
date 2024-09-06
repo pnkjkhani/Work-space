@@ -1,12 +1,13 @@
-import "@/styles/globals.css";
+import { AppProps } from "next/app";
+import { Theme } from "@radix-ui/themes";
 import '@radix-ui/themes/styles.css';
-import type { AppProps } from "next/app";
-import { Theme } from '@radix-ui/themes';
 
-export default function App({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Theme>
+    <Theme accentColor="mint">
       <Component {...pageProps} />
     </Theme>
   );
 }
+
+export default MyApp;
