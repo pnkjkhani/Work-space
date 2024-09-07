@@ -8,6 +8,8 @@ import {
   Box,
   Text,
   Link,
+  Card,
+  TextField,
 } from "@radix-ui/themes";
 import * as Form from "@radix-ui/react-form";
 import { UserInput } from "./api/signup";
@@ -76,17 +78,15 @@ const SignUp: React.FC = () => {
 
   return (
     <Flex align="center" justify="center" minHeight="100vh">
-      <Box
+      <Card
+        size="5"
+        variant="surface"
         style={{
-          background: "white",
           borderRadius: "8px",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-          padding: "2rem",
-          width: "100%",
-          maxWidth: "400px",
+          padding: "4rem",
         }}
       >
-        <Container size="1">
+        <Container size="3">
           <Heading size="5" mb="5" align="center">
             Sign Up
           </Heading>
@@ -100,18 +100,17 @@ const SignUp: React.FC = () => {
               <Form.Field name="firstName">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control asChild>
-                  <input
+                  <TextField.Root
                     type="text"
                     required
                     placeholder="Enter your first name"
                     value={formData.firstName}
                     onChange={handleChange}
                     name="firstName"
+                    radius="medium"
+                    size="3"
                     style={{
-                      width: "100%",
-                      padding: "0.5rem",
                       borderRadius: "4px",
-                      border: "1px solid #e2e8f0",
                     }}
                   />
                 </Form.Control>
@@ -123,18 +122,17 @@ const SignUp: React.FC = () => {
               <Form.Field name="lastName">
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control asChild>
-                  <input
+                  <TextField.Root
                     type="text"
                     required
                     placeholder="Enter your last name"
                     value={formData.lastName}
                     onChange={handleChange}
                     name="lastName"
+                    radius="medium"
+                    size="3"
                     style={{
-                      width: "100%",
-                      padding: "0.5rem",
                       borderRadius: "4px",
-                      border: "1px solid #e2e8f0",
                     }}
                   />
                 </Form.Control>
@@ -146,19 +144,15 @@ const SignUp: React.FC = () => {
               <Form.Field name="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control asChild>
-                  <input
+                  <TextField.Root
                     type="email"
                     required
                     placeholder="Enter your email"
                     value={formData.email}
                     onChange={handleChange}
                     name="email"
-                    style={{
-                      width: "100%",
-                      padding: "0.5rem",
-                      borderRadius: "4px",
-                      border: "1px solid #e2e8f0",
-                    }}
+                    radius="medium"
+                    size="3"
                   />
                 </Form.Control>
                 <Form.Message match="valueMissing">
@@ -191,7 +185,7 @@ const SignUp: React.FC = () => {
             </Flex>
           </Form.Root>
         </Container>
-      </Box>
+      </Card>
     </Flex>
   );
 };

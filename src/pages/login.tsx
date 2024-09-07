@@ -5,9 +5,10 @@ import {
   Flex,
   Container,
   Heading,
-  Box,
   Text,
   Link,
+  Card,
+  TextField,
 } from "@radix-ui/themes";
 import * as Form from "@radix-ui/react-form";
 import { useRouter } from "next/router";
@@ -77,68 +78,61 @@ const Login: React.FC = () => {
   };
 
   return (
+    <Flex align="center" justify="center" minHeight="100vh" width="100vw">
+      <Card variant="surface" size="5">
+        <Container size="4">
+          <Heading size="5" mb="5" align="center">
+            Login
+          </Heading>
+          {status && (
+            <Text color={status.isError ? "red" : "green"} mb="3">
+              {status.message}
+            </Text>
+          )}
+          <Form.Root onSubmit={handleSubmit}>
+            <Flex direction="column" gap="4">
+              <Form.Field name="email">
+                <Form.Label>Email</Form.Label>
+                <Form.Control asChild>
+                  <TextField.Root
+                    type="email"
+                    required
+                    placeholder="Enter your email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    name="email"
+                    radius="medium"
+                    size="3"
+                    style={{
+                      width: "100%",
+                      border: "1px solid #e2e8f0",
+                    }}
+                  />
+                </Form.Control>
+                <Form.Message match="valueMissing">
+                  Please enter your email
+                </Form.Message>
+                <Form.Message match="typeMismatch">
+                  Please enter a valid email
+                </Form.Message>
+              </Form.Field>
 
-        <Flex align="center" justify="center" minHeight="100vh" >
-          <Box style={{ background: 'var(--gray-a2)', borderRadius: 'var(--radius-3)' }}>
-            <Container size="1" >
-              <Heading size="5" mb="5" align="center">
-                Login
-              </Heading>
-              {status && (
-                <Text color={status.isError ? "red" : "green"} mb="3">
-                  {status.message}
-                </Text>
-              )}
-              <Form.Root onSubmit={handleSubmit}>
-                <Flex direction="column" gap="4">
-                  <Form.Field name="email">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control asChild>
-                      <input
-                        type="email"
-                        required
-                        placeholder="Enter your email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        name="email"
-                        style={{
-                          width: "100%",
-                          padding: "0.5rem",
-                          borderRadius: "4px",
-                          border: "1px solid #e2e8f0",
-                        }}
-                      />
-                    </Form.Control>
-                    <Form.Message match="valueMissing">
-                      Please enter your email
-                    </Form.Message>
-                    <Form.Message match="typeMismatch">
-                      Please enter a valid email
-                    </Form.Message>
-                  </Form.Field>
-
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    variant="surface"
-                  >
-                    {isSubmitting ? "Logging in..." : "Login"}
-                  </Button>
-
-                  {/* Add signup link */}
-                  <Text align="center">
-                    Don't have an account?{" "}
-                    <Button variant="surface">
-                      <Link underline="none" href="/signup">
-                        Sign up
-                      </Link>
-                    </Button>
-                  </Text>
-                </Flex>
-              </Form.Root>
-            </Container>
-          </Box>
-        </Flex>
+              <Button type="submit" disabled={isSubmitting} variant="surface">
+                {isSubmitting ? "Logging in..." : "Login"}
+              </Button>
+              <Flex gap="2">
+                <Text align="center">Don't have an account? </Text>
+                <Button variant="surface">
+                  <Link underline="none" href="/signup">
+                    Sign up
+                  </Link>
+                </Button>
+              </Flex>
+            </Flex>
+          </Form.Root>
+        </Container>
+      </Card>
+    </Flex>
   );
 };
 
