@@ -19,7 +19,7 @@ const Dashboard = () => {
         </Grid>
         {/* <Info /> */}
         <Scope />
-        <Footer />
+        <Footer nextRoute="/dashboard3" prevRoute="/dashboard"/>
       </Flex>
     </Box>
   );

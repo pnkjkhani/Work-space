@@ -5,7 +5,7 @@ import '@radix-ui/themes/styles.css';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Theme accentColor="mint" appearance="dark">
-      <Component {...pageProps} />
+        <Component {...pageProps} />
     </Theme>
   );
 }

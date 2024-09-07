@@ -17,7 +17,7 @@ const Dashboard = () => {
           <Steps />
         </Grid>
         <Info />
-        <Footer />
+        <Footer nextRoute="/dashboard2" prevRoute={null}/>
       </Flex>
     </Box>
   );
