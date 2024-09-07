@@ -6,12 +6,12 @@ const Header = () => {
 
       <Box width="100%">
         <Flex align="center" gap="4">
-          <ArrowLeftIcon/>
+          <ArrowLeftIcon />
           <Box>
             <Heading as="h1" size="8" weight="medium">
               Create Experience
             </Heading>
-            <Text >
+            <Text size="1">
               Rhoncus morbi et augue nec, in id ullamcorper at sit.
             </Text>
           </Box>

@@ -17,8 +17,8 @@ const Dashboard = () => {
           <Header />
           <Steps />
         </Grid>
-        {/* <Info /> */}
-        <Scope />
+        <Info />
+        {/* <Scope /> */}
         <Footer />
       </Flex>
     </Box>
