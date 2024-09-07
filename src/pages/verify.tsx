@@ -67,7 +67,7 @@ const VerifyPage: React.FC = () => {
       minHeight="100vh"
       minWidth="100vw"
     >
-      <Card variant="surface" size="5">
+      <Card variant="surface" size="5" >
         <Box>
           <Text as="label" size="3" weight="bold" align="center">
             Verify your account

@@ -1,6 +1,6 @@
 import { CheckIcon } from "@radix-ui/react-icons";
 import {
-    Avatar,
+  Avatar,
   Box,
   Card,
   Flex,
@@ -73,33 +73,37 @@ const CollectionTable = () => {
 
   return (
     <Box>
-      <Flex p="2" gap="2" direction="row" align="center">
-        <IconButton radius="medium" variant="surface" size="1">
-          <CheckIcon />
-        </IconButton>
-        <Heading as="h2" size="4">
-          Select all collection
-        </Heading>
-      </Flex>
+        {/* Header */}
+      <Card>
+        <Flex  gap="2" direction="row" align="center">
+          <IconButton radius="medium" variant="surface" size="1">
+            <CheckIcon />
+          </IconButton>
+          <Heading as="h2" size="4">
+            Select all collection
+          </Heading>
+        </Flex>
+      </Card>
+      {/* Content */}
       <ScrollArea type="always" scrollbars="vertical" style={{ height: 325 }}>
-        <Box p="2" pr="8">
+        <Box p="4">
           <Grid columns="repeat(5, 1fr)" gap="3" width="100%">
             {items.map((item) => (
               <Box key={item.id} maxWidth="240px" width="100%">
                 <Card size="2" style={{ height: "100%" }}>
                   <Flex gap="2" direction="column" align="center">
-                  <Avatar
-                    size="4"
-                    src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.67&fp-y=0.5&fp-z=1.4&fit=crop"
-                    radius="full"
-                    fallback="T"
-                  />
-                  <Text as="p" size="3">
-                    <Strong>Winter Collection</Strong> 
-                  </Text>
-                  <Text as="p" size="3">
-                    37 products
-                  </Text>
+                    <Avatar
+                      size="4"
+                      src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.67&fp-y=0.5&fp-z=1.4&fit=crop"
+                      radius="full"
+                      fallback="T"
+                    />
+                    <Text as="p" size="3">
+                      <Strong>Winter Collection</Strong>
+                    </Text>
+                    <Text as="p" size="3">
+                      37 products
+                    </Text>
                   </Flex>
                 </Card>
               </Box>
@@ -107,6 +111,14 @@ const CollectionTable = () => {
           </Grid>
         </Box>
       </ScrollArea>
+      {/* Footer */}
+      <Card>
+        <Flex  gap="2" direction="row" align="center">
+          <Heading as="h2" size="4">
+            56 collections
+          </Heading>
+        </Flex>
+      </Card>
     </Box>
   );
 };
