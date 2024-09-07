@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { CheckCircledIcon, CheckIcon } from "@radix-ui/react-icons";
 import { Flex, IconButton, Separator, Text } from "@radix-ui/themes";
 
 export default function Steps() {

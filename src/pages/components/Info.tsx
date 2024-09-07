@@ -1,7 +1,5 @@
 import {
   Box,
-  Button,
-  DropdownMenu,
   Flex,
   Grid,
   Select,
@@ -17,26 +15,6 @@ const Info = () => {
         <Box>
           <TextField.Root placeholder="Quize name" size="3"></TextField.Root>
         </Box>
-
-        {/* <DropdownMenu.Root>
-          <DropdownMenu.Trigger>
-            <Button variant="surface" size="3">
-              Question type
-              <DropdownMenu.TriggerIcon />
-            </Button>
-          </DropdownMenu.Trigger>
-          <DropdownMenu.Content size="2" align="center" variant="soft">
-            <DropdownMenu.Item shortcut="⌘ D">Duplicate</DropdownMenu.Item>
-            <DropdownMenu.Separator />
-            <DropdownMenu.Item shortcut="⌘ N">Archive</DropdownMenu.Item>
-            <DropdownMenu.Separator />
-            <DropdownMenu.Item shortcut="⌘ N">Archive</DropdownMenu.Item>
-            <DropdownMenu.Separator />
-            <DropdownMenu.Item shortcut="⌘ N">Archive</DropdownMenu.Item>
-            <DropdownMenu.Separator />
-            <DropdownMenu.Item shortcut="⌘ N">Archive</DropdownMenu.Item>
-          </DropdownMenu.Content>
-        </DropdownMenu.Root> */}
         <Select.Root size="3" defaultValue="Exprience type">
           <Select.Trigger />
           <Select.Content align="center" variant="soft">

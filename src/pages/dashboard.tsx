@@ -3,7 +3,6 @@ import { Box, Flex, Grid } from "@radix-ui/themes";
 import Steps from "./components/Steps";
 import Info from "./components/Info";
 import Footer from "./components/Footer";
-import Scope from "./components/Scope";
 
 const Dashboard = () => {
   return (
@@ -17,8 +16,7 @@ const Dashboard = () => {
           <Header />
           <Steps />
         </Grid>
-        {/* <Info /> */}
-        <Scope />
+        <Info />
         <Footer />
       </Flex>
     </Box>

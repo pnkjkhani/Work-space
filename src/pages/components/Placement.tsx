@@ -8,20 +8,19 @@ import {
   TextField,
 } from "@radix-ui/themes";
 import React, { useState } from "react";
-import ProductSelectionTable from "./ProductsSelection";
-
-const Scope = () => {
+import CollectionTable from "./CollectionTable";
+const Placement = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   return (
     <Flex gap="4" direction="column">
       <Grid columns="4" gap="3" width="auto">
-        <Select.Root size="3" >
+      <Select.Root size="3" defaultValue="Select collection">
           <Select.Trigger />
           <Select.Content align="center" variant="soft">
             <Select.Group>
-              <Select.Item value="Select Products" disabled>
-                Experience type
+              <Select.Item value="Select collectiion" disabled>
+              Select collectiion
               </Select.Item>
               <Select.Separator />
               <Select.Item value="orange">Orange</Select.Item>
@@ -47,9 +46,9 @@ const Scope = () => {
           Search
         </Button>
       </Grid>
-      <ProductSelectionTable searchQuery={searchQuery} />
+      <CollectionTable />
     </Flex>
   );
 };
 
-export default Scope;
+export default Placement;

@@ -1,11 +1,10 @@
 import Header from "./components/Header";
 import { Box, Flex, Grid } from "@radix-ui/themes";
 import Steps from "./components/Steps";
-import Info from "./components/Info";
 import Footer from "./components/Footer";
-import Scope from "./components/Scope";
+import Placement from "./components/Placement";
 
-const Dashboard = () => {
+const Dashboard3 = () => {
   return (
     <Box minHeight="100dvh" minWidth="100vw" p="9">
       <Flex direction="column" gap="4">
@@ -17,12 +16,11 @@ const Dashboard = () => {
           <Header />
           <Steps />
         </Grid>
-        {/* <Info /> */}
-        <Scope />
+        <Placement />
         <Footer />
       </Flex>
     </Box>
   );
 };
 
-export default Dashboard;
+export default Dashboard3;
