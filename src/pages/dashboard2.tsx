@@ -13,6 +13,7 @@ const Dashboard = () => {
           columns={{ initial: "1", md: "2" }}
           gap="3"
           width="auto"
+          py="6"
         >
           <Header />
           <Steps />

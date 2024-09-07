@@ -9,7 +9,8 @@ const Dashboard4 = () => {
   return (
     <Box minHeight="100dvh" minWidth="100vw" p="9">
       <Flex direction="column" gap="4">
-        <Grid columns={{ initial: "1", md: "2" }} gap="3" width="auto">
+        <Grid columns={{ initial: "1", md: "2" }} gap="3" width="auto" py="6"
+        >
           <Header />
           <Steps />
         </Grid>
