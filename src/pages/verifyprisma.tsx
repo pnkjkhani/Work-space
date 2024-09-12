@@ -35,7 +35,7 @@ const VerifyPage: React.FC = () => {
     }
 
     try {
-      const response = await fetch("/api/verify", {
+      const response = await fetch("/api/verifyusingprisma", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

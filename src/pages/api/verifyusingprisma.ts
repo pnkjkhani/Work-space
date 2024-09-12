@@ -1,13 +1,13 @@
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
+
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { connectToDatabase } from '../utils/db';
-import User from '../schemas/user.schema';
 import { generateOTP } from '../helper/generateOTP';
 import { sendOTPEmail } from '../helper/sendOTP';
 
 export type verifyResponse = {
   success: boolean;
   message: string;
-  
 };
 
 export type VerifyRequestBody = {
@@ -27,11 +27,10 @@ export default async function handler(
     }
 
     try {
-      // Connect to the database
-      await connectToDatabase();
-      
       // Find the user by email
-      const user = await User.findOne({ email });
+      const user = await prisma.user.findFirst({
+        where: { email: email },
+      });
 
       if (!user) {
         return res.status(400).json({ success: false, message: 'No user found with this email' });
@@ -47,10 +46,11 @@ export default async function handler(
         const newOTP = generateOTP();
         const otpExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes from now
 
-        // Save new OTP to database
-        user.otp = newOTP;
-        user.otpExpires = otpExpires;
-        await user.save();
+        // Update user with new OTP and expiry
+        await prisma.user.updateMany({
+          where: { email: user.email }, // Use the unique identifier 'id' instead of 'email'
+          data: { otp: newOTP, otpExpires }
+        });
 
         // Send new OTP via email
         const emailSent = await sendOTPEmail(email, newOTP);
@@ -68,10 +68,10 @@ export default async function handler(
       }
 
       // OTP is valid, update user document
-      user.otp = '';
-      user.otpExpires = new Date();
-      user.isVerified = true;  // Set isVerified to true
-      await user.save();
+      await prisma.user.update({
+        where: { id: user.id }, // Add user.email or the correct field that uniquely identifies the user
+        data: { otp: '', otpExpires: new Date(), isVerified: true }
+      });
 
       return res.status(200).json({ success: true, message: 'OTP verified successfully' });
     } catch (error) {

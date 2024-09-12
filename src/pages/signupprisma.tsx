@@ -48,7 +48,7 @@ const SignUp: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const response: Response = await fetch("/api/signup", {
+      const response: Response = await fetch("/api/signupusingprisma", { // Updated endpoint
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +62,7 @@ const SignUp: React.FC = () => {
         setStatus({ message: signUpApiResponse.message, isError: false });
         setFormData({ firstName: "", lastName: "", email: "" }); // Reset form
         // Redirect to verify page
-        router.push("/verify");
+        router.push("/verifyprisma");
       } else {
         setStatus({ message: signUpApiResponse.message, isError: true });
       }
@@ -177,7 +177,7 @@ const SignUp: React.FC = () => {
               <Text align="center">
                 Already have an account?{" "}
                 <Button variant="surface">
-                  <Link underline="none" href="/login">
+                  <Link underline="none" href="/loginprisma">
                     Sign in
                   </Link>
                 </Button>
