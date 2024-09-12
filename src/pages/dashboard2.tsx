@@ -1,7 +1,6 @@
 import Header from "./components/Header";
 import { Box, Flex, Grid } from "@radix-ui/themes";
 import Steps from "./components/Steps";
-import Info from "./components/Info";
 import Footer from "./components/Footer";
 import Scope from "./components/Scope";
 
@@ -18,7 +17,6 @@ const Dashboard = () => {
           <Header />
           <Steps />
         </Grid>
-        {/* <Info /> */}
         <Scope />
         <Footer nextRoute="/dashboard3" prevRoute="/dashboard"/>
       </Flex>
